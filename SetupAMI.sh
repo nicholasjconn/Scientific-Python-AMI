@@ -20,21 +20,24 @@ pushd OpenBLAS
 make FC=gfortran
 sudo make PREFIX=/usr/local/ install
 popd
+rm -rf OpenBLAS
  
 # Numpy
 git clone https://github.com/numpy/numpy
 pushd numpy
-vim site.cfg:
-#
+cat > site.cfg << EOL
 [default]
 library_dirs = /usr/local/lib
+
 [atlas]
 atlas_libs = openblas
 library_dirs = /usr/local/lib
+
 [lapack]
 lapack_libs = openblas
 library_dirs = /usr/local/lib
-#
+
+EOL
 export BLAS=/usr/local/lib/libopenblas.a
 export LAPACK=/usr/local/lib/libopenblas.a
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
@@ -43,7 +46,7 @@ python3 setup.py build
 # run test_numpy.py
 sudo python3 setup.py install
 popd
-
+rm -rf numpy
 
 # Scipy
 git clone https://github.com/scipy/scipy
@@ -52,6 +55,7 @@ python3 setup.py build
 sudo BLAS=/usr/local/lib/libopenblas.a LAPACK=/usr/local/lib/libopenblas.a LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/ python3 setup.py install
 # run test_scipy.py
 popd
+rm -rf scipy
 
 # Install other important Python packages 
 sudo pip3 install ipython[all]
