@@ -23,6 +23,7 @@ popd
 rm -rf OpenBLAS
  
 # Numpy
+sudo pip uninstall numpy
 git clone https://github.com/numpy/numpy
 pushd numpy
 cat > site.cfg << EOL
