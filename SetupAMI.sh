@@ -41,6 +41,9 @@ EOL
 export BLAS=/usr/local/lib/libopenblas.a
 export LAPACK=/usr/local/lib/libopenblas.a
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
+echo 'export BLAS=/usr/local/lib/libopenblas.a' >>~/.bash_profile
+echo 'LAPACK=/usr/local/lib/libopenblas.a' >>~/.bash_profile
+echo 'LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/' >>~/.bash_profile
 python3 setup.py build
 # verify existence of build/lib.*/numpy/core/_dotblas.so
 # run test_numpy.py
